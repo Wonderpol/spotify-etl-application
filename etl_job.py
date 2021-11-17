@@ -22,7 +22,7 @@ def check_if_valid_data(df: pd.DataFrame) -> bool:
         raise Exception("Found null value")
 
     # Check that all timestamps are of yesterday's date
-    yesterday = datetime.datetime.now() - datetime.timedelta(days=2)
+    yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
     yesterday = yesterday.replace(hour=0, minute=0, second=0, microsecond=0)
 
     timestamps = df["timestamp"].tolist()
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     }
 
     today = datetime.datetime.now()
-    yesterday = today - datetime.timedelta(days=2)
+    yesterday = today - datetime.timedelta(days=1)
     yesterday_unix_timestamp = int(yesterday.timestamp()) * 1000
 
     req = requests.get(
