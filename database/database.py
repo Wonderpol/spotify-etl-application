@@ -10,7 +10,7 @@ class Database:
         self.cursor.execute(sql)
         self.connection.commit()
 
-    def insert__to_db(self, table, *values):
+    def insert_to_db(self, table, *values):
         self.cursor.execute(f"INSERT INTO {table} VALUES ({', '.join('?' for _ in values)})", values)
         self.connection.commit()
 
