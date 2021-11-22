@@ -22,3 +22,22 @@ def create_song_df(request_result: json) -> pd.DataFrame:
     }
 
     return pd.DataFrame(song_dict, columns=["song_name", "artist_name", "played_at", "timestamp"])
+
+
+def create_top_artist_df(request_result: json) -> pd.DataFrame:
+    artist_names = []
+    artist_popularities = []
+    artist_genres = []
+
+    for artist in request_result["items"]:
+        artist_names.append(artist["name"])
+        artist_popularities.append(artist["popularity"])
+        artist_genres.append((lambda gen: gen[0] if gen != [] else "Not defined")(artist["genres"]))
+
+    artist_dict = {
+        "artist_name": artist_names,
+        "artist_popularity": artist_popularities,
+        "artist_genres": artist_genres
+    }
+
+    return pd.DataFrame(artist_dict, columns=["artist_name", "artist_popularity", "artist_genres"])
